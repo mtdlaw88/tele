@@ -1,73 +1,84 @@
-# ICO DAY
+# cryptoexcBot - chat bot
+It is repository for chat bot: [@cryptoexcBot](https://t.me/cryptoexcBot)
 
-[**Telegram Hyip Bot**](https://t.me/ico_day_bot)
+## What it is?
+This repository can be imported to [Bots.Business](https://bots.business) as a worked chat bot.
 
-[**Marketing Page**](https://telegra.ph/Dobro-pozhalovat-v-ICO-DAY-05-10)
+[Bots.Business](https://bots.business) - it is probably the first CBPaaS - Chat Bot Platform as a Service.
 
-![](https://telegra.ph/file/ebbd34f093f0afb72c6f5.jpg)
+A CBPaaS is a cloud-based platform that enables developers to create chatbots without needing to build backend infrastructure.
 
-Financial pyramid developed by me, for which I was not paid.
+## Create your own bot for Telegram from this Git repo
 
-**Python 3.6 required**
+How to create bot?
+1. Create bot with [@BotFather](https://telegram.me/BotFather) and take Secret Token
+2. Create bot in App and add Secret Token
+3. Add Public Key from App as [Deploy key](https://developer.github.com/v3/guides/managing-deploy-keys/#deploy-keys) with read access (and write access for bot exporting if you need it)
+4. Do import for this git repo
 
-**Main features**
+Now you can talk with yours new Telegram Bot
 
-- Everyday payments
-- Intuitive interface
-- Refferals excel export
-- Detailed transaction history
-- Automated flood detecting and ban system
-- Web admin page
-- Realtime new refferals, daily income and account top up notifications
-- Payments from unknown wallets can be managed in admin section
-- Blockcypher integration for payments accepting
-- Conversation authsave on app shutdown
-- Hi-load
+See [more](https://help.bots.business/getting-started)
 
-**Main stack**
- - [python-telegram-bot](https://github.com/python-telegram-bot/python-telegram-bot)
- - [flask](https://github.com/pallets/flask)
- - [peewee](https://github.com/coleifer/peewee)
+## Commands - in commands folder
+File name - it is command name (Bot it can be rewritten in command description)
 
-The motivation behind it is to keep things small and not redundant.
+Command can have: `name`, `help`, `aliases` (second names), `answer`, `keyboard`, `scnarios` (for simple logic) and other options.
 
-**Notes**
+### Command description
+It is file header:
 
-This project has been developed with weak python knowledge, so some parts of my code may look ugly. If I've been developing it now I would:
+    /*CMD
+      command: /test
+      help: this is help for ccommand
+      need_reply: [ true or false here ]
+      auto_retry_time: [ time in sec ]
+      answer: it is example answer for /test command
+      keyboard: button1, button2
+      aliases: /test2, /test3
+    CMD*/
 
-- Used Decimals over floats
-- Created two separate apps (web app preferably Django + REST) and use bot as a GUI
-- Used multilanguage strings
+See [more](https://help.bots.business/commands)
 
-**Setup**
+### Command body
+It is command code in JavaScript.
+Use Bot Java Script for logic in command.
 
-Before running the app you need to tweak two configs.
+For example:
+> Bot.sendMessage(2+2);
 
-- config.py stores some info which is accessed from different app parts.
+See [more](https://help.bots.business/scenarios-and-bjs)
 
-- config.json stores private information.
 
-```
-{
-  "token": "YOUR TELEGRAM TOKEN",
-  "admin": {
-    "username": "name",
-    "password": "pass"
-  },
-  "blockcypher_key": "YOUR BLOCKCYPHER TOKEN"
-}
-```
+## Libraries - in libs folder
+You can store common code in the libs folder. File name - it is library name.
 
-If you wanna use webhook instead of websockets you should place it like this.
+For example code in myLib.js:
 
-```
-...
- |___telegram-hyip
-|___keys
-```
+    function hello(){ Bot.sendMessage("Hello from lib!") }
+    function goodbye(name){ Bot.sendMessage("Goodbye, " + name) }
 
-Keys folder must be if the same place with the telegram-hyip project.
+    publish({
+      sayHello: hello,
+      sayGoodbyeTo: goodbye
+    })
 
-**To run** the app just run `python flask_app.py`.
+then you can run in any bot's command:
 
-**To shutdown** the app you can use `CTRL + C`, but make sure that it saved all conversation data before pressing `CTRL + C` again.
+    Libs.myLib.hello()
+    Libs.myLib.sayGoodbyeTo("Alice")
+
+See [more](https://help.bots.business/git/library)
+
+## Other bots example
+See other bots examples in the [github](https://github.com/bots-business?utf8=✓&tab=repositories&q=&type=public&language=javascript) or in the [Bot Store](https://bots.business/)
+
+
+## Other help
+[Help.bots.business](https://help.bots.business)
+
+## API
+See [API](https://api.bots.business/docs#/docs/summary)
+
+
+![](https://bots.business/images/web-logo.png)
